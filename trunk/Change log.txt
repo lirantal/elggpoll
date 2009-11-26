@@ -1,0 +1,54 @@
+This version is modified to work with Elggv1.6.1
+===============================================
+WARNING
+This is a BETA version for testing purposes only, not production. It works well in our testing environment but unsolved bugs have been reported. 
+
+
+Modified by Team Webgalli
+===============================================
+Contact drsanupmoideen[at]gmail[dot]com
+Website = www.webgalli.com
+Elgg powered site :www.m4medicine.com
+===============================================
+
+Modified by Vinsoft di Erminia Naccarato (www.vinsoft.it)
+===============================================
+Contact info[at]vinsoft[dot]it
+Website = www.vinsoft.it
+Elgg powered site: www.hacksud.org/elgg
+===============================================
+
+
+CHANGELOG
+
+Modified Simple Poll Plugin Version 1.0b2
+- some bug fix
+
+Modified Simple Poll Plugin Version 1.0b2
+
+- updated to the last version of Simple Poll Plugin (http://community.elgg.org/pg/plugins/jmellberg/read/70261/simple-poll-plugin-for-elgg-15)
+- fixed river 
+- fixed some translations
+
+
+Modified Simple Poll Plugin Version 1.0b1
+Added features:
+    * Administrator setting: moderation on/off
+    * Categories
+    * Group polls
+    * administrator can add polls to homepage (via modified custom index)
+
+Integration with Modified Custom Index.
+If both Modified Ads and Modified Custom Index are installed a link appears in the administration area from where administrators can approve ads to be published in home page. 
+
+
+Based on Elgg Poll Plugin
+----------------------------------------------
+Original author = John Mellberg
+website =http://www.syslogicinc.com
+copyright =(C) John Mellberg 2009
+----------------------------------------------
+
+
+
+
