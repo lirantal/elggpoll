@@ -60,6 +60,12 @@
 	background-position: right -40px;
 }
 
+
+div.poll_fields  {
+	text-align: right;
+	direction:rtl;
+}
+
 .input-radio {
 	border:none;
 	text-align:left;

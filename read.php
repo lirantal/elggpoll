@@ -23,9 +23,8 @@
         $pollpost = get_entity($post);
 
         if(!get_entity($pollpost->container_guid) instanceof ElggGroup){
-    set_context("poll2");
-
-}
+			set_context("poll2");
+		}
 
 	// If we can get out the poll post ...
 		if ($pollpost = get_entity($post)) {

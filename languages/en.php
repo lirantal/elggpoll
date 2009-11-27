@@ -23,24 +23,27 @@
 			'poll:strapline' => "%s",			
 			'item:object:poll' => 'Polls',
 			'poll:question' => "Poll Question",
-			'poll:responses' => "Response Choices (separate with commas)",
-'poll:approvelist'=>"Polls to be approved",
+			'poll:responses' => "Response Choices",
+			'poll:approvelist'=>"Polls to be approved",
             'poll:mypolls'=>"My polls",
             'poll:displayyourpoll'=>"This widget shows your polls",
             'poll:latestComunityPoll'=>"Latest community polls",
             'poll:displaymostrecentpoll'=>"Show latest polls",
-	    'poll:saved:request'=>"Request saved waiting to approve",
+			'poll:saved:request'=>"Request saved waiting to approve",
             'poll:enabled'=>"Poll enabled",
             'poll:saved'=>"Poll saved!",
             'poll:requests'=>"Request approval polls",
             'poll:enable:on'=>"Enable",
+			'poll:enable_group_polls' => "Enable group polls",
             'poll:results'=>"Results",
+			'poll:response' => "Response",
+			'poll:add_response' => "Add Response",
 
 		/**
 	     * poll widget
 	     **/	
-	     'poll:widget:label:displaynum' => "How many polls you want to display?",
-	     'poll:usepolladmin'=>"Moderation polls by  site administrator",
+		 	'poll:widget:label:displaynum' => "How many polls you want to display?",
+	 	    'poll:usepolladmin'=>"Moderation polls by  site administrator",
             'poll:usepolladmin:yes'=>"Yes",
             'poll:usepolladmin:no'=>"No",
 			
@@ -82,11 +85,11 @@
 			'poll:notdeleted' => "Sorry; we could not delete this Poll.", 
 			'polls:nonefound' => "No Polls were found from %s",
 			'poll:group' => "Group's polls",
-            		'poll:add'=>"Add polls",
-'responses'=>"responses"
+            'poll:add'=>"Add polls",
+			'responses'=>"responses",
 );
 
 					
-	add_translation("en",$english);
+	add_translation("en", $english);
 
 ?>

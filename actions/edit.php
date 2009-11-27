@@ -41,8 +41,6 @@
 		// Convert string of tags into a preformatted array
 		$tagarray = string_to_tag_array($tags);
 	
-		//convert string of responses to array
-		$responsearray = string_to_response_array($responses);
 		
 		// Make sure the title / description aren't blank
 		if (empty($question) || empty($responses)) {
@@ -75,10 +73,7 @@
 			//add the new responses
 			$poll->clearMetadata('responses');
 			
-			if(is_array($responsearray))
-			{
-				$poll->responses = $responsearray;
-			}
+			$poll->responses = $responses;
 		
 			// Now let's add tags. We can pass an array directly to the object property! Easy.
 			$poll->clearMetadata('tags');
@@ -86,7 +81,7 @@
 			if (is_array($tagarray)) {
 				$poll->tags = $tagarray;
 			}
-
+			
             $defaultpolladmin = intval(get_plugin_setting('usepolladmin', 'poll'));
         if($defaultpolladmin == 1){
 
@@ -106,27 +101,9 @@
             if($defaultpolladmin == 0)
     system_message(sprintf(elgg_echo("poll:saved"),$poll->question));
 
-forward("pg/poll/group:". $container_guid);
+	forward("pg/poll/group:". $container_guid);
 }
     }
 		
-			// Forward to the main poll page
-			// forward("mod/poll/?username=" . $_SESSION['user']->username);
-			//forward($_SERVER['HTTP_REFERER']);
-
-	
-	// function for turning comma delimited strings 
-	// into an array for storage as metadata	
-	function string_to_response_array($string) {
-		
-		if (is_string($string)) {
-			$ar = explode(",",$string);
-			$ar = array_map('trim', $ar);
-			
-			return $ar;
-		}
-		return false;
-		
-	}
 
 ?>

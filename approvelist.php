@@ -30,7 +30,7 @@
 	$context = get_context();
 	
 	//set_context('search');
-	$entities1=get_disabled_entities('object',"poll", 0, $limit, true, true, true);
+	$entities1=poll_get_disabled_entities('object',"poll", 0, $limit, true, true, true);
     
 
 /*	if ($tag != "")
@@ -39,8 +39,8 @@
 		$objects = list_entities('group',"", 0, $limit, true, true, true);*/
 //===================
 	$offset = (int) get_input('offset');
-	$count = get_disabled_entities('object', "poll", 0, "", $limit, $offset, true);
-	$entities = get_disabled_entities('object', "poll", 0, "", $limit, $offset);
+	$count = poll_get_disabled_entities('object', "poll", 0, "", $limit, $offset, true);
+	$entities = poll_get_disabled_entities('object', "poll", 0, "", $limit, $offset);
 	$objects = elgg_view_entity_list($entities, $count, $offset, $limit, true, false, true);
 
 //=====================		

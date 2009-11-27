@@ -16,7 +16,7 @@
 		//set up our variables
 		$action = "poll/vote";
 		$question = $vars['entity']->question;
-		$responses = $vars['entity']->responses;
+		$responses = $vars['entity']->responses;		
 		$tags = $vars['entity']->tags;
 		$access_id = $vars['entity']->access_id;
 	}
@@ -31,6 +31,7 @@
 
 	//convert $responses to radio inputs for form display
 	$response_inputs = "";
+	
 	if (!empty($responses)) {
     	if (is_array($responses)) {
 	  		
@@ -53,6 +54,14 @@
    		}
    	}
    	
+	$form_fields = "";
+	
+	foreach ($fields as $field) {
+		$form_fields .= "<input type='text' name='fields[]' size='60' value='$field' /><br/>";
+	}
+	
+	$response_inputs .= "<br/><br/> " . $form_fields;
+	
    	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('Vote')));
 
 	if (isset($vars['entity'])) {
