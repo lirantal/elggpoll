@@ -67,9 +67,9 @@
 		if (function_exists('add_group_tool_option')) {
 			$poll_default = get_plugin_setting('group_default', 'poll');
 			if (!$poll_default || ($poll_default == 'yes')) {
-				add_group_tool_option('poll',elgg_echo('poll:enable_poll'),true);
+				add_group_tool_option('poll',elgg_echo('poll:enable_group_polls'),true);
 			} else {
-				add_group_tool_option('poll',elgg_echo('poll:enable_poll'),false);
+				add_group_tool_option('poll',elgg_echo('poll:enable_group_polls'),false);
 			}
 		}
 		
@@ -219,7 +219,7 @@
 		}
 
         //Create function for the entity that are disabled
-        function get_disabled_entities($type = "", $subtype = "", $owner_guid = 0, $order_by = "", $limit = 10, $offset = 0, $count = false, $site_guid = 0, $container_guid = null, $enabled = false)
+        function poll_get_disabled_entities($type = "", $subtype = "", $owner_guid = 0, $order_by = "", $limit = 10, $offset = 0, $count = false, $site_guid = 0, $container_guid = null, $enabled = false)
         {
 		global $CONFIG;
 
