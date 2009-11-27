@@ -1,0 +1,35 @@
+CHANGELOG
+
+1.1 Poll plugin
+	-	changed responses input field from a single commas option to
+		dynamically added input text elements
+	-	removed SESSION saved data
+	-	
+
+
+
+1.0b2 Modified Simple Poll Plugin Version
+	-	some bug fix
+
+
+
+1.0b2 Modified Simple Poll Plugin Version
+
+	-	updated to the last version of Simple Poll Plugin
+		(http://community.elgg.org/pg/plugins/jmellberg/read/70261/simple-poll-plugin-for-elgg-15)
+	-	fixed river 
+	-	fixed some translations
+
+
+
+1.0b1 Modified Simple Poll Plugin Version
+
+	-	Added features:
+    		* Administrator setting: moderation on/off
+			* Categories
+			* Group polls
+			* administrator can add polls to homepage (via modified custom index)
+
+	-	Integration with Modified Custom Index.
+	-	If both Modified Ads and Modified Custom Index are installed a link appears in the administration
+		area from where administrators can approve ads to be published in home page. 

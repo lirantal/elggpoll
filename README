@@ -1,0 +1,62 @@
+
+==============================================
+MOD NAME--->	Poll
+VERSION---->	1.1
+CREATED BY->	(C) Liran Tal 2009, John Mellberg 2009, Dr Sanu P Moideen, 
+					Vinsoft
+==============================================
+
+INDEX:
+
+-> About this mod
+-> Supported versions
+-> Installation
+-> Playing this plugin
+-> Version History
+-> Credits & Contact
+
+
+
+
+===============================================
+ABOUT THIS MOD:
+===============================================
+*	Provides polls functionality for both users,
+	site-wide and groups
+*	Derived from the original Polls plugin
+
+
+
+
+===============================================
+SUPPORTED VERSIONS:
+===============================================
+*	Elgg 1.5
+*	Elgg 1.6.1
+
+
+
+
+===============================================
+INSTALLATION:
+===============================================
+*	Extract poll.zip into elgg's module directory.
+	it is crucial that the extracted directory name is called 'poll'
+*	Enable module in admin tools
+
+
+
+
+===============================================
+CREDITS AND CONTACT:
+===============================================
+*	This version is modified to work with Elgg v1.6.1
+
+*	Modified by Liran Tal of Enginx <liran.tal@gmail.com>
+*	Modified by Team Webgalli www.webgalli.com
+*	Modified by drsanupmoideen[at]gmail[dot]com
+*	Modified by Vinsoft di Erminia Naccarato www.vinsoft.it
+	info[at]vinsoft[dot]it	www.vinsoft.it
+
+===============================================
+
