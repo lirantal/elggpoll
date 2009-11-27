@@ -29,56 +29,51 @@
 			//$title = elgg_echo("poll:addpost");
 			$action = "poll/add";
 			$question = "";
-			$responses = "";
 			$tags = "";
 			$access_id = -2;
             $container_guid = get_input('container_guid', $_SESSION['user']->getGUID());
             $homepage='';
 		}
 
-	// Just in case we have some cached details
+		// Just in case we have some cached details
 		if (isset($vars['question'])) {
 			$question = $vars['question'];
-			$responses = $vars['responses'];
 			$tags = $vars['polltags'];
 		}
             $poll_homepage[0]='Yes';
             $poll_homepage[1]='No';
             $poll_homepage[2]='Read';
 		
-	//convert $responses to string for text display
-		$responsestring = "";
-		
-		if (!empty($responses)) {
-    		if (is_array($responses)) {
-	  	    	foreach($responses as $response) {
-	            
-	  	    		if (!empty($responsestring)) {
-	     				$responsestring .= ", ";
-	       			}
-	            	
-	            	if (is_string($response)) {
-	            		$responsestring .= $response;
-	            	} else {
-	            		$responsestring .= $response->value;
-	            	}
-	            
-	        	}
-    		} else {
-    			$responsestring = $responses;
-    		}
-    	}
-
-
 ?>
 
 <?php
+
+		$lang_response = elgg_echo('poll:response');
+		$lang_remove = elgg_echo('remove');
+		$lang_pollresponses = elgg_echo('poll:responses');
+		$lang_addresponses = elgg_echo('poll:add_response');
+		
         $question_label = elgg_echo('poll:question');
         $question_textbox = elgg_view('input/text', array('internalname' => 'question', 'value' => $question));
-        
-        $responses_label = elgg_echo('poll:responses');
-        $responses_textbox = elgg_view('input/text', array('internalname' => 'responses', 'value' => $responsestring));
-                
+		
+		
+		// if no responses are available yet meaning this is a new poll
+		// then we add 4 empty responses by default
+		if (count($responses) == 0)
+			$responses = array("", "", "", "");
+		
+		$form_fields = "";
+		$i = 100;
+		foreach ($responses as $response) {
+			$form_fields .= "<p id='fieldid_$i'>";
+			$form_fields .= "<input  type='text' name='responses[]' size='60' value='$response' /> ";
+			$form_fields .= "<a href='#' onClick='poll_removeFormInputField(\"#fieldid_$i\"); return false;'>$lang_remove</a>";
+			$form_fields .= "<br/>";
+			$form_fields .= "</p>";
+			$i++;
+		}
+		
+		
         $tag_label = elgg_echo('tags');
         $tag_input = elgg_view('input/tags', array('internalname' => 'polltags', 'value' => $tags));
                 
@@ -104,16 +99,26 @@
         	$entity_hidden = '';
         }
 
+		
         $form_body = <<<EOT
 		
 		<p>
 			<label>$question_label</label><br />
                         $question_textbox
 		</p>
+
+		<br/>
 		<p>
-			<label>$responses_label</label><br />
-                        $responses_textbox
+			<label>$lang_pollresponses</label><br/>
+			$form_fields
+			<input type="hidden" id="idCounter" value="1">
+			<div id="div_poll_fields" class="poll_fields"></div>
+		
 		</p>
+		<p><a href="#" onClick="poll_addFormInputField(); return false;">Add</a></p>
+		<br/>
+		
+		
 		<p>
 			<label>$tag_label</label><br />
                         $tag_input
@@ -129,6 +134,27 @@
 			<label>$homepage_label</label><br />
                         $homepage_hidden
 		</p>
+		
+		
+		
+		<script type="text/javascript">
+
+			function poll_addFormInputField() {
+			
+				var id = document.getElementById("idCounter").value;
+				$("#div_poll_fields").append("<p id='row" + id + "'><label for='txt" + id + "'> <input type='text' size='60' name='responses[]' id='txt" + id + "'> <a href='#' onClick='poll_removeFormInputField(\"#row" + id + "\"); return false;'>$lang_remove</a><p>");
+				
+				id = (id-1)+2;
+				document.getElementById("idCounter").value = id;
+				
+			}
+			
+			function poll_removeFormInputField(id) {
+				$(id).remove();
+			}
+			
+		</script>
+		
 		<p>
 			$entity_hidden
 			$submit_input
