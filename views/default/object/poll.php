@@ -1,17 +1,18 @@
 <?php
-
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
 
+	 $user = get_input("username", $_SESSION['user']->username);
+	 
+	 $owner = $vars['entity']->getOwnerEntity();
+	 
 	if (isset($vars['entity'])) {
 			
 		if (get_context() == "search"||get_context() == "admin") {
@@ -38,7 +39,7 @@
 		<?php
 		if ($vars['entity']->canEdit()) {
 		?>
-			<a href="<?php echo $vars['url']; ?>mod/poll/edit.php?pollpost=<?php echo $vars['entity']->getGUID(); ?>"><?php echo elgg_echo("edit"); ?></a>
+			<a href="<?php echo $vars['url']; ?>pg/poll/<?=$user?>/edit/<?php echo $vars['entity']->getGUID(); ?>"><?php echo elgg_echo("edit"); ?></a>
 			<?php
 					
 					echo elgg_view("output/confirmlink", array(
@@ -64,7 +65,7 @@
 	    </div>
 			<p class="strapline">
 				<?php echo sprintf(elgg_echo("poll:strapline"), date("F j, Y",$vars['entity']->time_created)); ?>
-				<?php echo elgg_echo('by'); ?> <a href="<?php echo $vars['url']; ?>pg/ad/<?php echo $vars['entity']->getOwnerEntity()->username; ?>"><?php echo $vars['entity']->getOwnerEntity()->name; ?></a> 
+				<?php echo elgg_echo('by'); ?> <a href="<?php echo $vars['url']; ?>pg/ad/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a> 
 				<!-- display the comments link -->
 				<?php
 			    //get the number of responses
@@ -93,7 +94,7 @@
 	<div class="contentWrapper">
 			<?php
 				
-				$isPgOwner = ($vars['entity']->getOwnerEntity()->guid == $vars['user']->guid);
+				$isPgOwner = ($owner->guid == $vars['user']->guid);
 				$priorVote = checkForPreviousVote($vars['entity'], $vars['user']->guid);
 				
 		$alreadyVoted = 0;
@@ -119,41 +120,17 @@
 			
 		
     <!-- show results -->
-    <?php if ( ($alreadyVoted) || ($vars['entity']->canEdit()) ) { ?>
-		<!-- show results -->
-		<div class="contentWrapper">
-		<p align="center"><a onclick="toggleResults();" style="cursor:hand;">
-        <?php echo sprintf(elgg_echo('poll:results')); ?>
-        </a></p>
-		</div>
-		<div id="resultsDiv" class="poll_post_body" style="display:none;">
+    <?php if ( ($alreadyVoted) || ($vars['entity']->canEdit()) ): ?>
+		<div id="resultsDiv" class="contentWrapper" style="display:block;">
 			<?php echo elgg_view('poll/results',array('entity' => $vars['entity'])); ?>
-	</div>
+		</div>
 		
-	<?php
-		}
-	?>
+	<?php endif; ?>
 		
 		<div class="clearfloat"></div>
 						
 
 	</div>
-
-	<script type="text/javascript">
-		function toggleResults()
-		{
-			var resultsDiv = document.getElementById('resultsDiv');
-			
-			if (resultsDiv.style.display == 'none')
-			{
-				resultsDiv.style.display = 'block';
-			}
-			else 
-			{	
-				resultsDiv.style.display = 'none';
-			}
-		}		
-	</script>
 	
 <?php
 

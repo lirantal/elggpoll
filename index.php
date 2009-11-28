@@ -1,17 +1,15 @@
 <?php
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
-	 
-	 
+
+
 	// Load Elgg engine
 		require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 		
@@ -24,11 +22,18 @@
         set_context('poll2');
 
 	//set poll title
-		if($page_owner == $_SESSION['user']){
+		if ($page_owner == $_SESSION['user']){
 			$area2 = elgg_view_title(elgg_echo('poll:your'));
-		}elseif(!$page_owner instanceof ElggGroup){
+		} else {
+			$area2 = elgg_view_title($page_owner->name. "'s ". elgg_echo('polls'));
+		}
+		
+		
+		/*
+		elseif(!$page_owner instanceof ElggGroup){
 			$area1 = elgg_view_title(elgg_echo('poll:polls').$page_owner->username );
-		}else{$area1 =elgg_view_title(elgg_echo('poll')." ".$page_owner->name );}
+		}//else{$area1 =elgg_view_title(elgg_echo('poll')." ".$page_owner->name );}
+		*/
 		
 	// Get a poll posts
 		$polls = $page_owner->getObjects('poll',50,0);

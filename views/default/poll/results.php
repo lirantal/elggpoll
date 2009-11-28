@@ -1,18 +1,16 @@
-<div class="contentWrapper">
-
 <?php
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
 
 	if (isset($vars['entity'])) {
+				
 		
 		//set img src
 		$img_src = $vars['url'] . "mod/poll/graphics/poll.gif";
@@ -28,12 +26,9 @@
 		//get the count of responses
 		$user_responses_count = $vars['entity']->countAnnotations('vote');
 		
-		//create new array to store response and count
-		//$response_count = array();
+?>
 		
-		?>
-		
-		<h3><?php echo $question; ?></h3>
+		<h3><?php echo elgg_echo('poll:results') ?></h3>
 		
 		<?php
 		//populate array
@@ -45,7 +40,6 @@
 			//calculate %
 			$response_percentage = round(100 / ($user_responses_count / $response_count))
 			
-			//html
 			?>
 			<div id="progress_indicator" >
 				<label><?php echo $response . " (" . $response_count . ")"; ?></label><br>
@@ -89,4 +83,3 @@
 		return $count;
 	}
 ?>
-</div>

@@ -1,15 +1,12 @@
 <?php
-
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
 
 	// Make sure we're logged in (send us to the front page if not)
@@ -18,6 +15,8 @@
 	// Make sure action is secure
 	action_gatekeeper();
 
+	$page_owner = get_entity(get_input('page_owner', $_SESSION['user']->getGUID()));
+	
 	// Get input data
 	$question = get_input('question');
 	$responses = get_input('responses');
@@ -38,7 +37,7 @@
 	// Make sure the question / responses aren't blank
 	if (empty($question) || empty($responses)) {
 		register_error(elgg_echo("poll:blank"));
-		forward("mod/poll/add.php");
+		forward("pg/poll/".$page_owner->username."/add");
 			
 	// Otherwise, save the poll post 
 	} else {
@@ -64,7 +63,7 @@
 		// Before we can set metadata, we need to save the poll post
 		if (!$poll->save()) {
 			register_error(elgg_echo("poll:error"));
-			forward("mod/poll/add.php");
+			forward("pg/poll/".$page_owner->username."/add");
 
 		}
 
@@ -90,16 +89,13 @@
 		// Success message
 		system_message(elgg_echo("poll:posted"));
 		
-		
 		// Remove the poll post cache
 		unset($_SESSION['question']); unset($_SESSION['responses']); unset($_SESSION['polltags']);
-				//remove_metadata($_SESSION['user']->guid,'question');
-			//remove_metadata($_SESSION['user']->guid,'responses');
-			//remove_metadata($_SESSION['user']->guid,'polltags');
- if($defaultpolladmin == 0)
-    system_message(sprintf(elgg_echo("poll:saved"),$poll->question));
+ 
+		if($defaultpolladmin == 0)
+			system_message(sprintf(elgg_echo("poll:saved"),$poll->question));
 
-		forward("mod/poll/?username=" . $_SESSION['user']->username);
+		forward("pg/poll/".$page_owner->username);
 	}
 
 

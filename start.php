@@ -1,15 +1,13 @@
 <?php
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
 
 	/**
 	 * poll initialisation
@@ -85,54 +83,55 @@
 			$group_poll = get_plugin_setting('group_poll', 'poll');
 			if (!$group_poll || $group_poll != 'no') {
 				if (!$page_owner->poll_enable || $page_owner->poll_enable != 'no') {
-					add_submenu_item(elgg_echo("poll:group"), $CONFIG->wwwroot . "pg/poll/group:" . $page_owner->getGUID());
+					//add_submenu_item(elgg_echo("poll:group"), $CONFIG->wwwroot . "pg/poll/group:" . $page_owner->getGUID());
+					add_submenu_item(elgg_echo("poll:group"), $CONFIG->wwwroot . "pg/poll/" . $page_owner->username);
 				}
 			}
 
 		}
 
 			//add submenu options
+			/*
 				if (get_context() == "poll") {
-					if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
+					if ((page_owner() == $_SESSION['guid']) || (!page_owner() && isloggedin()) ) {
 						add_submenu_item(elgg_echo('poll:your'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username);
 						add_submenu_item(elgg_echo('poll:friends'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/friends/");
-						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."mod/poll/everyone.php");
-						add_submenu_item(elgg_echo('poll:addpost'),$CONFIG->wwwroot."mod/poll/add.php");
+						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/everyone");
+						add_submenu_item(elgg_echo('poll:addpost'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/add");
 					} else if (page_owner()) {
 						$page_owner = page_owner_entity();
 						add_submenu_item(sprintf(elgg_echo('poll:user'),$page_owner->name),$CONFIG->wwwroot."pg/poll/" . $page_owner->username);
 						if ($page_owner instanceof ElggUser) // Sorry groups, this isn't for you.
 							add_submenu_item(sprintf(elgg_echo('poll:user:friends'),$page_owner->name),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/friends/");
-						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."mod/poll/everyone.php");
+						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/everyone");
 					} else {
-						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."mod/poll/everyone.php");
+						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/everyone");
 					}
 				}
+			*/
 
                 //add submenu options
 				if (get_context() == "poll2") {
-                    $page_owner = page_owner_entity();
-					if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
-						add_submenu_item(elgg_echo('poll:your'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username,'0pollmanage');
-						add_submenu_item(elgg_echo('poll:friends'),$CONFIG->wwwroot."pg/poll/" . $_SESSION['user']->username . "/friends/",'0pollmanage');
-						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."mod/poll/everyone.php",'0pollmanage');
-						add_submenu_item(elgg_echo('poll:addpost'),$CONFIG->wwwroot."mod/poll/add.php",'0pollmanage');
+                    //$page_owner = page_owner_entity();
+					if (($page_owner->getGUID() == $_SESSION['user']->guid) || (!page_owner() && isloggedin()) ) {
+						add_submenu_item(elgg_echo('poll:your'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username);
+						add_submenu_item(elgg_echo('poll:friends'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/friends/");
+						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/everyone");
+						add_submenu_item(elgg_echo('poll:addpost'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/add");
 
+					} else if ( ($page_owner instanceof ElggUser) && ($page_owner->getGUID() != $_SESSION['user']->guid) ) {
+						add_submenu_item($page_owner->name . "'s ". elgg_echo('polls'), $CONFIG->wwwroot."pg/poll/" . $page_owner->username);
+						add_submenu_item(elgg_echo('poll:everyone'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/everyone");
 					}
+					
 
-                if ($page_owner instanceof ElggGroup ) {
-                    $page_owner = page_owner_entity();
-
-
+					if ($page_owner instanceof ElggGroup ) {
+						//$page_owner = page_owner_entity();
+	
 						add_submenu_item(sprintf(elgg_echo('poll:user'),$page_owner->name),$CONFIG->wwwroot."pg/poll/" . $page_owner->username,'0pollmanage');
-                       //print(get_relationship(page_owner()));
-//                       print_r(check_entity_relationship(page_owner(), 'member', $_SESSION['user']->guid));
-//                       print(page_owner()); print_r($_SESSION['user']->guid);
-
-                       if($page_owner->isMember($_SESSION['user']))
-                       add_submenu_item(sprintf(elgg_echo('poll:add'),$page_owner->name),$CONFIG->wwwroot."mod/poll/add.php?"."container_guid=".$page_owner->getGUID(),'0pollmanage');
-                    }
-//
+					   if($page_owner->isMember($_SESSION['user']))
+						   add_submenu_item(elgg_echo('poll:addpost'),$CONFIG->wwwroot."pg/poll/" . $page_owner->username . "/add/".$page_owner->getGUID());						   
+					}
                 }
 
           
@@ -165,9 +164,22 @@
 			// The second part dictates what we're doing
 			if (isset($page[1])) {
 				switch($page[1]) {
-					case "read":		set_input('pollpost',$page[2]);
-										@include(dirname(__FILE__) . "/read.php");
-										break;
+					case "add":		
+								set_input('container_guid',$page[2]);
+								@include(dirname(__FILE__) . "/add.php");
+								break;
+					case "read":		
+								set_input('pollpost',$page[2]);
+								@include(dirname(__FILE__) . "/read.php");
+								break;
+					case "everyone":		
+								//set_input('pollpost',$page[2]);
+								@include(dirname(__FILE__) . "/everyone.php");
+								break;
+					case "edit":		
+								set_input('pollpost',$page[2]);
+								@include(dirname(__FILE__) . "/edit.php");
+								break;
 					case "friends":		@include(dirname(__FILE__) . "/friends.php");
 										break;
 				}

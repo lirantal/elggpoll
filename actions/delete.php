@@ -1,16 +1,13 @@
 <?php
-
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
-
 
 	// Make sure we're logged in (send us to the front page if not)
 		gatekeeper();
@@ -33,7 +30,7 @@
 					register_error(elgg_echo("poll:notdeleted"));
 				}
 		// Forward to the main poll page
-				forward("mod/poll/?username=" . $owner->username);
+				forward("pg/poll/".$owner->username);
 		
 		}
 		
