@@ -1,18 +1,17 @@
 <div class="contentWrapper">
 
 <?php
-
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
+	 
+	 $page_owner = page_owner_entity();
 	 
 	// Set title, form destination
 		if (isset($vars['entity'])) {
@@ -25,6 +24,7 @@
             $container_guid = get_input('container_guid', $_SESSION['user']->getGUID());
             $homepage=$vars['entity']->homepage;
             $categories=$vars['entity']->categories;
+			
 		} else  {
 			//$title = elgg_echo("poll:addpost");
 			$action = "poll/add";
@@ -35,6 +35,15 @@
             $homepage='';
 		}
 
+		// if this is a group's poll we set the default access of the poll
+		// to the group's ownership
+		
+		if ((isset($page_owner)) && ($page_owner instanceof ElggGroup)) {
+			$access_id = $page_owner->group_acl;
+		}
+		
+		
+		
 		// Just in case we have some cached details
 		if (isset($vars['question'])) {
 			$question = $vars['question'];
@@ -81,6 +90,7 @@
         $access_input = elgg_view('input/access', array('internalname' => 'access_id', 'value' => $access_id));
 
         $container_guid_hidden = elgg_view('input/hidden', array('internalname' => 'container_guid', 'value' => $container_guid));
+		$page_owner_hidden = elgg_view('input/hidden', array('internalname' => 'page_owner', 'value' => $page_owner->getGUID()));
 
         if(isadminloggedin() && is_plugin_enabled('custom_index')){
             $homepage_label = elgg_echo('poll:homepage');
@@ -159,10 +169,10 @@
 			$entity_hidden
 			$submit_input
             $container_guid_hidden
+			$page_owner_hidden
 		</p>
 EOT;
 
       echo elgg_view('input/form', array('action' => "{$vars['url']}action/$action", 'body' => $form_body));
 ?>
 </div>
-

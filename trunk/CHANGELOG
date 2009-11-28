@@ -1,9 +1,16 @@
 CHANGELOG
 
 1.1 Poll plugin
+	-	MASSIVE code cleaning. SERIOUSLY!
 	-	changed responses input field from a single commas option to
 		dynamically added input text elements
 	-	removed SESSION saved data
+	-	changed header of results from being the poll's title to the
+		text "Results"
+	-	compatible with groups
+	-	
+	-	
+	-	
 	-	
 
 

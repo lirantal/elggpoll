@@ -1,15 +1,12 @@
 <?php
-
-	/**
-	 * Elgg Poll plugin
-	 * @package Elggpoll
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @Original author John Mellberg
-	 * website http://www.syslogicinc.com
-	 * @Modified By Team Webgalli to work with ElggV1.5
-	 * www.webgalli.com or www.m4medicine.com
-     * "Code modified by Vinsoft di Erminia Naccarato, www.vinsoft.it"
-	 */
+/**
+ * Elgg Poll plugin
+ * @package poll
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author	Liran Tal
+ * Code modified by 
+ * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
+ */
 	 
 
 	// Make sure we're logged in (send us to the front page if not)
@@ -26,10 +23,12 @@
 	$pollpost = get_input('pollpost');
     $categories=get_input('universal_categories_list');
     $homepage=get_input('homepage');
+
+	$user = get_input("username", $_SESSION['user']->username);
 		
 	// Make sure we actually have permission to edit
 	$poll = get_entity($pollpost);
-      $container_guid=$poll->container_guid;
+	$container_guid=$poll->container_guid;
 	
 	if ($poll->getSubtype() == "poll" && $poll->canEdit()) {
 	
@@ -65,7 +64,7 @@
 			// Before we can set metadata, we need to save the poll post
 			if (!$poll->save()) {
 				register_error(elgg_echo("poll:error"));
-				forward("mod/poll/edit.php?pollpost=" . $guid);
+				forward("pg/poll/".$user."edit/".$poll->guid);
 			}
 		// Add to river
 	        add_to_river('river/object/poll/update','update',$_SESSION['user']->guid,$poll->guid);
@@ -83,25 +82,19 @@
 			}
 			
             $defaultpolladmin = intval(get_plugin_setting('usepolladmin', 'poll'));
-        if($defaultpolladmin == 1){
-
-	    disable_entity($poll->guid);
-		system_message(sprintf(elgg_echo("poll:saved:request"),$poll->question));
-        }
+			
+			if($defaultpolladmin == 1){
+				disable_entity($poll->guid);
+				system_message(sprintf(elgg_echo("poll:saved:request"),$poll->question));
+			}
 		
 			// Success message
 			system_message(elgg_echo("poll:posted"));
-			
-			
-			// Remove the poll post cache
-			unset($_SESSION['question']); 
-			unset($_SESSION['responses']); 
-			unset($_SESSION['polltags']);
 
             if($defaultpolladmin == 0)
-    system_message(sprintf(elgg_echo("poll:saved"),$poll->question));
+				system_message(sprintf(elgg_echo("poll:saved"),$poll->question));
 
-	forward("pg/poll/group:". $container_guid);
+			forward("pg/poll/".$user."/read/".$poll->guid);
 }
     }
 		
