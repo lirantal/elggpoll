@@ -42,12 +42,18 @@
 			
 			?>
 			<div id="progress_indicator" >
-				<label><?php echo $response . " (" . $response_count . ")"; ?></label><br>
-				<div id="progressBarContainer" align="left">	
-					<img src="<?php echo $img_src; ?>" width="<?php echo $response_percentage; ?>%" height="12px">
-				</div>	
+			
+				<div id="progressBarContainer" style="width: <?=$response_percentage?>%;" ></div>
+				<div id="progressBarContainerText" >
+					</div>
+				<div id="progressBarContainerPercent" >
+					<?=$response_percentage?>%
+					</div>
+				
 			</div>
-			<br>
+			<?=$response?>
+			<br/>
+			<br/>
 		<?php
 		}
 		?>

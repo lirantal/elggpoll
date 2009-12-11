@@ -39,9 +39,7 @@
 				
 			//add vote as an annotation
 			$poll->annotate('vote', $response, $poll->access_id);
-				
-			// Success message
-			system_message(elgg_echo("poll:responded"));
+			
 			// Add to river
 	        add_to_river('river/object/poll/vote','vote',$_SESSION['user']->guid,$poll->guid);
 				
@@ -52,7 +50,6 @@
 			$_SESSION['hasVoted'] = $poll->guid;
 	
 			// Forward to the poll page
-			//forward("pg/poll/" . $owner . "/read/" . $poll->id . "/" . $poll->question);
 			forward($_SERVER['HTTP_REFERER']);
 								
 		}
