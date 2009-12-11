@@ -39,7 +39,7 @@ if (isadminloggedin() && get_context () == 'admin'&& !strstr($url_server,"approv
 
 
 //$info = "<p>" . elgg_echo('poll') . ": <a href=\"{$vars['entity']->getURL()}\">{$vars['entity']->question}</a></p>";
-$info .= "<p>{$responses} ".elgg_echo("responses")."</p>";
+$info .= "<p>{$responses} ".elgg_echo("poll:responses_")."</p>";
 $info .= "<p class=\"owner_timestamp\"><a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}</p>";
 echo elgg_view_listing($icon,$info);
 

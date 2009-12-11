@@ -65,9 +65,9 @@
 		if (function_exists('add_group_tool_option')) {
 			$poll_default = get_plugin_setting('group_default', 'poll');
 			if (!$poll_default || ($poll_default == 'yes')) {
-				add_group_tool_option('poll',elgg_echo('poll:enable_group_polls'),true);
+				add_group_tool_option('poll', elgg_echo("poll:enable_group_polls"),true);
 			} else {
-				add_group_tool_option('poll',elgg_echo('poll:enable_group_polls'),false);
+				add_group_tool_option('poll', elgg_echo("poll:enable_group_polls"),false);
 			}
 		}
 		
