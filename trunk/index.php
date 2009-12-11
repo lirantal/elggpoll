@@ -25,7 +25,7 @@
 		if ($page_owner == $_SESSION['user']){
 			$area2 = elgg_view_title(elgg_echo('poll:your'));
 		} else {
-			$area2 = elgg_view_title($page_owner->name. "'s ". elgg_echo('polls'));
+			$area2 = elgg_view_title(sprintf(elgg_echo('poll:user'), $page_owner->name));
 		}
 		
 		
