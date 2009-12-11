@@ -58,7 +58,7 @@
 <?php
 
 		$lang_response = elgg_echo('poll:response');
-		$lang_remove = elgg_echo('remove');
+		$lang_remove = elgg_echo('poll:remove_response');
 		$lang_pollresponses = elgg_echo('poll:responses');
 		$lang_addresponses = elgg_echo('poll:add_response');
 		
@@ -125,7 +125,7 @@
 			<div id="div_poll_fields" class="poll_fields"></div>
 		
 		</p>
-		<p><a href="#" onClick="poll_addFormInputField(); return false;">Add</a></p>
+		<p><a href="#" onClick="poll_addFormInputField(); return false;">$lang_addresponses</a></p>
 		<br/>
 		
 		

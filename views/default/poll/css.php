@@ -17,7 +17,7 @@
 
 .poll_post_icon {
 	float:left;
-	margin:3px 0 0 0;
+	margin:-5px 0 0 0;
 	padding:0;
 }
 
@@ -70,6 +70,7 @@ div.poll_fields  {
 	vertical-align:top;
 }
 
+/*
 #progress_indicator {
 	width:400px;
 	padding: 10px;
@@ -80,6 +81,37 @@ div.poll_fields  {
 	width:100%;
 	border: 1px #D9541E solid;
 }
+*/
+
+#progress_indicator {
+	width: 550px;
+	height: 20px;
+	/* background-color:	rgb(146, 183, 211); */
+	background-color: #AFC7C7;
+}
+	
+#progressBarContainer {
+	border-right: 1px solid white;
+	width: 50%;
+	height: 20px;
+	background-color: rgb(91, 147, 191);
+}
+
+#progressBarContainerText {
+	text-align: left;
+	margin-top: -20px;
+	color: white;
+	padding-left: 4px;
+	margin-right: 6px;
+}
+
+#progressBarContainerPercent {
+	text-align: right;
+	margin-top: -18px;
+	color: white;
+	padding-right: 6px;
+}
+
 
 /* ***************************************
 	RIVER
