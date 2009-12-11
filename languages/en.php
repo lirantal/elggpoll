@@ -38,6 +38,8 @@
             'poll:results'=>"Results",
 			'poll:response' => "Response",
 			'poll:add_response' => "Add Response",
+			'poll:remove_response' => "Remove Response",
+			'poll:responses_'=>"responses",
 
 		/**
 	     * poll widget
@@ -86,7 +88,6 @@
 			'polls:nonefound' => "No Polls were found from %s",
 			'poll:group' => "Group's polls",
             'poll:add'=>"Add polls",
-			'responses'=>"responses",
 );
 
 					
