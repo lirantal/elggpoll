@@ -19,9 +19,6 @@
 	//the page owner
 	$owner_guid = $vars['entity']->owner_guid;
 	$owner = page_owner_entity();
-		echo "<div class=\"contentWrapper\">";
-		echo "<h3>Let " . $owner->name . " know what you think!</h3>";
-		echo "</div>";
 	$polls = get_user_objects($owner_guid, 'poll', $limit, 0);
 	if ($polls){
 		foreach($polls as $pollpost) {
@@ -31,7 +28,7 @@
 	else
 	{
 		echo "<div class=\"contentWrapper\">";
-		echo "<p>" . $owner->name . " hasn't created a poll yet.</p>";
+		echo "<p>" . $owner->name . elgg_echo('poll:nopolls')."</p>";
 		echo "</div>";
 	}
 	

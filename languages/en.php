@@ -48,6 +48,7 @@
 	 	    'poll:usepolladmin'=>"Moderation polls by  site administrator",
             'poll:usepolladmin:yes'=>"Yes",
             'poll:usepolladmin:no'=>"No",
+			'poll:nopolls'=>"hasn't created a poll yet",
 			
          /**
 	     * poll river
