@@ -16,11 +16,11 @@
 		$icon = elgg_view(
 						"profile/icon", array(
 										'entity' => $owner,
-										'size' => 'tiny',
+										'size' => 'small',
 									  		)
 						);
 		$info = "<a href=\"{$vars['entity']->getURL()}\">{$vars['entity']->question}</a><br>";
-		$info .= "{$responses}".elgg_echo("responses")."<br />";
+		$info .= "{$responses} ".elgg_echo("poll:responses_")."<br/>";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}</p>";
-		echo elgg_view_listing($icon,$info);//elgg_view_listing($icon,$info); elgg_echo($info);
+		echo elgg_view_listing($icon, $info);//elgg_view_listing($icon,$info); elgg_echo($info);
 ?>
