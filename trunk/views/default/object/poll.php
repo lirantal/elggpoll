@@ -8,13 +8,7 @@
  * Team Webgalli, Vinsoft di Erminia Naccarato, www.vinsoft.it
  */
 	 
- 	/*
- 	$entity_guid = $vars['entity']->getGUID();
-	$base = $vars['url'] . "mod/poll/vendors/open-flash-chart-2/";
-	$chart = $vars['url'] . "mod/poll/results.php?entity_guid=$entity_guid";	
-	$swf = $base."open-flash-chart.swf";
-	*/
-	
+
 	 $user = get_input("username", $_SESSION['user']->username);
 	 
 	 $owner = $vars['entity']->getOwnerEntity();
@@ -124,29 +118,12 @@
 		</div>
 		<div class="clearfloat"></div>
 			
-		
-    <!-- show results -->
-    <?php if ( ($alreadyVoted) || ($vars['entity']->canEdit()) ): ?>
-	
-	
-		<script type="text/javascript" src="<?=$base?>js/swfobject.js"></script>
-		<script type="text/javascript">
-		
-		swfobject.embedSWF(
-		"<?=$swf?>", "my_chart",
-		"550", "250", "9.0.0", "expressInstall.swf",
-		{"data-file":"<?=$chart?>"} );
-		
-		</script>
-
 		<div id="resultsDiv" class="contentWrapper" style="display:block;">
 			<?php echo elgg_view('poll/results',array('entity' => $vars['entity'])); ?>
 		</div>
-		
-	<?php endif; ?>
-		
+
 		<div class="clearfloat"></div>
-						
+
 
 	</div>
 	
